@@ -1,1 +1,9 @@
+.env
+.vscode/
+.DS_Store
+.tscache
 node_modules/
+
+build/
+buildcache/
+initial_db_data/
