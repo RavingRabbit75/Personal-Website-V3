@@ -36,7 +36,7 @@ router.get("/globalinfo", (req: Request, res: Response)=>{
                 desc1: info.headerSelfDescription[0],
                 desc2: info.headerSelfDescription[1]
             },
-            global_icons: info.globalLinksData
+            global_icons: info.global_icons
         };
         globalInfoFound = globalInfoObj;
 

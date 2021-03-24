@@ -1,6 +1,5 @@
 "use strict";
 
-const { json } = require("express");
 const fs = require("fs");
 const mongo = require("mongodb");
 const mongoClient = mongo.MongoClient("mongodb://localhost:27017", {useUnifiedTopology: true});
@@ -8,24 +7,26 @@ const mongoClient = mongo.MongoClient("mongodb://localhost:27017", {useUnifiedTo
 const dbName = "personal_website";
 const skillsCollName = "skills";
 const globalInfoCollName = "globalInfo";
-
+const educationCollName = "education";
+const experienceCollName = "experience";
+const projectsCollName = "projects";
 
 function connectToDB() {
     return mongoClient.connect();
 }
 
 
-function globalInfo(mongoObj) {
+function initGlobalInfo(mongoObj, collName) {
     let db = null;
     let globalInfoColl = null;
 
     db = mongoObj.db(dbName);
-    globalInfoColl = db.collection(globalInfoCollName);
-    console.log(`Deleting all docs in ${globalInfoCollName} collection...`);
+    globalInfoColl = db.collection(collName);
+    console.log(`Deleting all docs in ${collName} collection...`);
 
     return globalInfoColl.deleteMany({}).then((delResults)=>{
 
-        console.log(`Collection Name: ${globalInfoCollName}, Deleted Docs: ${delResults.deletedCount}` );
+        console.log(`Collection Name: ${collName}, Deleted Docs: ${delResults.deletedCount}` );
         let rawData = fs.readFileSync("./initial_db_data/baseContent.json");
         let jsonData = JSON.parse(rawData);
         console.log(`Inserting global info data...`);
@@ -33,7 +34,7 @@ function globalInfo(mongoObj) {
 
     }).then((insertResults)=>{
 
-        console.log(`Collection Name: ${globalInfoCollName}, Inserted Docs: ${insertResults.insertedCount}`);
+        console.log(`Collection Name: ${collName}, Inserted Docs: ${insertResults.insertedCount}`);
 
     }).catch((err)=>{
 
@@ -44,17 +45,17 @@ function globalInfo(mongoObj) {
 }
 
 
-function initSkillsList(mongoObj) {
+function initSkillsList(mongoObj, collName) {
     let db = null;
     let skillsColl = null;
 
     db = mongoObj.db(dbName);
-    skillsColl = db.collection(skillsCollName);
-    console.log(`Deleting all docs in ${skillsCollName} collection...`);
+    skillsColl = db.collection(collName);
+    console.log(`Deleting all docs in ${collName} collection...`);
 
     return skillsColl.deleteMany({}).then((delResults)=>{
 
-        console.log(`Collection Name: ${skillsCollName}, Deleted Docs: ${delResults.deletedCount}` );
+        console.log(`Collection Name: ${collName}, Deleted Docs: ${delResults.deletedCount}` );
         let rawData = fs.readFileSync("./initial_db_data/skills.json");
         let jsonData = JSON.parse(rawData);
         console.log(`Inserting skills data...`);
@@ -62,7 +63,7 @@ function initSkillsList(mongoObj) {
 
     }).then((insertResults)=>{
 
-        console.log(`Collection Name: ${skillsCollName}, Inserted Docs: ${insertResults.insertedCount}`);
+        console.log(`Collection Name: ${collName}, Inserted Docs: ${insertResults.insertedCount}`);
 
     }).catch((err)=>{
 
@@ -73,10 +74,101 @@ function initSkillsList(mongoObj) {
 
 }
 
+
+function initEducationInfo(mongoObj, collName) {
+    let db = null;
+    let educationColl = null;
+
+    db = mongoObj.db(dbName);
+    educationColl = db.collection(collName);
+    console.log(`Deleting all docs in ${collName} collection...`);
+
+    return educationColl.deleteMany({}).then((delResults)=>{
+
+        console.log(`Collection Name: ${collName}, Deleted Docs: ${delResults.deletedCount}` );
+        let rawData = fs.readFileSync("./initial_db_data/education.json");
+        let jsonData = JSON.parse(rawData);
+        console.log(`Inserting education data ...`);
+        return educationColl.insertMany(jsonData);
+
+    }).then((insertResults)=>{
+
+        console.log(`Collection Name: ${collName}, Inserted Docs: ${insertResults.insertedCount}`);
+
+    }).catch((err)=>{
+
+        console.log(err);
+        process.exit();
+    
+    });
+
+}
+
+function initExperienceInfo(mongoObj, collName) {
+    let db = null;
+    let experienceColl = null;
+
+    db = mongoObj.db(dbName);
+    experienceColl = db.collection(collName);
+    console.log(`Deleting all docs in ${collName} collection...`);
+
+    return experienceColl.deleteMany({}).then((delResults)=>{
+        console.log(`Collection Name: ${collName}, Deleted Docs: ${delResults.deletedCount}` );
+        let rawData = fs.readFileSync("./initial_db_data/experience.json");
+        let jsonData = JSON.parse(rawData);
+        console.log(`Inserting experience data ...`);
+        return experienceColl.insertMany(jsonData);
+
+    }).then((insertResults)=>{
+        
+        console.log(`Collection Name: ${collName}, Inserted Docs: ${insertResults.insertedCount}`);
+
+    }).catch((err)=>{
+
+        console.log(err);
+        process.exit();
+
+    });
+
+}
+
+
+function initProjectsInfo(mongoObj, collName) {
+    let db = null;
+    let projectsColl = null;
+
+    db = mongoObj.db(dbName);
+    projectsColl = db.collection(collName);
+    console.log(`Deleting all docs in ${collName} collection...`);
+
+    return projectsColl.deleteMany({}).then((delResults)=>{
+        console.log(`Collection Name: ${collName}, Deleted Docs: ${delResults.deletedCount}` );
+        let rawData = fs.readFileSync("./initial_db_data/projects.json");
+        let jsonData = JSON.parse(rawData);
+        console.log(`Inserting projects data ...`);
+        return projectsColl.insertMany(jsonData);
+
+    }).then((insertResults)=>{
+
+        console.log(`Collection Name: ${collName}, Inserted Docs: ${insertResults.insertedCount}`);
+
+    }).catch((err)=>{
+
+        console.log(err);
+        process.exit();
+
+    });
+
+}
+
+
 let run = async () => {
     let mongoObj = await connectToDB();
-    await globalInfo(mongoObj);
-    await initSkillsList(mongoObj);
+    await initGlobalInfo(mongoObj, globalInfoCollName);
+    await initSkillsList(mongoObj, skillsCollName);
+    await initEducationInfo(mongoObj, educationCollName);
+    await initExperienceInfo(mongoObj, experienceCollName);
+    await initProjectsInfo(mongoObj, projectsCollName);
     mongoClient.close();
 }
 
