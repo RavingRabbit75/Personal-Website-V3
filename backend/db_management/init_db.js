@@ -10,6 +10,7 @@ const globalInfoCollName = "globalInfo";
 const educationCollName = "education";
 const experienceCollName = "experience";
 const projectsCollName = "projects";
+const filtersCollName = "filters";
 
 function connectToDB() {
     return mongoClient.connect();
@@ -161,6 +162,32 @@ function initProjectsInfo(mongoObj, collName) {
 
 }
 
+function initFiltersInfo(mongoObj, collName) {
+    let db = null;
+    let filtersColl = null;
+
+    db = mongoObj.db(dbName);
+    filtersColl = db.collection(collName);
+    console.log(`Deleting all docs in ${collName} collection...`);
+
+    return filtersColl.deleteMany({}).then((delResults)=>{
+        console.log(`Collection Name: ${collName}, Deleted Docs: ${delResults.deletedCount}`);
+        let rawData = fs.readFileSync("./initial_db_data/filters.json");
+        let jsonData = JSON.parse(rawData);
+        console.log(`Inserting filter data ...`);
+        return filtersColl.insertMany(jsonData);
+    }).then((insertResults)=>{
+
+        console.log(`Collection Name: ${collName}, Inserted Docs: ${insertResults.insertedCount}`);
+
+    }).catch((err)=>{
+
+        console.log(err);
+        process.exit();
+
+    })
+}
+
 
 let run = async () => {
     let mongoObj = await connectToDB();
@@ -169,6 +196,7 @@ let run = async () => {
     await initEducationInfo(mongoObj, educationCollName);
     await initExperienceInfo(mongoObj, experienceCollName);
     await initProjectsInfo(mongoObj, projectsCollName);
+    await initFiltersInfo(mongoObj, filtersCollName)
     mongoClient.close();
 }
 
