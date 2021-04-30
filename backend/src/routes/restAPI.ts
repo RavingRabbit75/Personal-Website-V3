@@ -183,8 +183,10 @@ router.get("/projects", (req: Request, res: Response) => {
         projectsFound.push(projectsObj);
 
     }).then((results: any) => {
-        console.log(projectsFound);
-        res.send(projectsFound);
+        let finalProjectsObj = {
+            "projects": projectsFound
+        }
+        res.send(finalProjectsObj);
     }).catch((err: any) => {
         console.log(err);
     })
