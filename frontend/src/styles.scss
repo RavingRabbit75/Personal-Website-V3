@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'scss_partials/global_variables';
+
+body {
+    background-color: $main-grey-bg;
+    margin: 0px;
+}

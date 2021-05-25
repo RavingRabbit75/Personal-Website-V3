@@ -1,0 +1,30 @@
+<div>
+    <div class="header-main-bg">
+        <app-date-time></app-date-time>
+
+        <div class="hero-images-box">
+            <div class="hero-images">
+                <img class="header-image1" [src]="headerImageName" alt=""/>
+                <img class="header-image2" [src]="headerImageLaptop" alt=""/>
+            </div>
+        </div>
+
+        <div class="developer-title text-center text">
+            {{ globalData.global_description.desc1 }} {{ globalData.global_description.desc2 }}
+        </div>
+
+        <div id="header-icon-links" class="header-icon-links text-center">
+            <app-icon-link *ngFor="let icon of globalIcons; index as i;"
+                [filename]="icon.filename"
+                [filenameOver]="icon.filenameOver"
+                [link]="icon.link"
+                [section]="icon.section"
+                [rowPosition]="icon.rowPosition">
+            </app-icon-link>
+        </div>
+
+    </div>
+
+    <div class="header-edge"></div>
+	<div class="header-dropoff"></div>
+</div>
