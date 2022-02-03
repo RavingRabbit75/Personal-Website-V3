@@ -8,6 +8,7 @@ import { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import path from "path";
 import { MongoClient } from "mongodb";
+import cors from "cors";
 
 import restAPI from "./routes/restAPI";
 
@@ -17,6 +18,7 @@ const port = process.env.PORT;
 const dbName = process.env.DBNAME;
 const app = express();
 
+app.use(cors());
 app.use(morgan("dev"));
 
 // custom middleware
@@ -27,7 +29,15 @@ app.use((req: Request, res: Response, next: NextFunction)=>{
 app.use("/api/v1", restAPI);
 
 app.get("/", (req: Request, res: Response)=>{
-    res.send("/");
+    res.sendFile(path.join(__dirname+'/../views/index.html'));
+});
+
+
+app.get("/dud", (req: Request, res: Response)=>{
+    const num1: number = 10;
+    let answer = num1 + 10;
+    
+    res.send("dud");
 });
 
 
