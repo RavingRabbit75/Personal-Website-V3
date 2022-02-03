@@ -1,0 +1,13 @@
+<div>
+    <div id="footer" class="footer">
+        <div id="header-icon-links" class="footer-icon-links text-center">
+            <app-icon-link *ngFor="let icon of globalIcons; index as i;"
+                [filename]="icon.filename_footer"
+                [filenameOver]="icon.filename_footer_over"
+                [link]="icon.link"
+                [section]="icon.section"
+                [rowPosition]="icon.rowPosition">
+            </app-icon-link>
+        </div>
+    </div>
+</div>

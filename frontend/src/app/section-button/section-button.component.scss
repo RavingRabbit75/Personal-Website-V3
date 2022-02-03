@@ -1,0 +1,44 @@
+// @import 'scss_partials/global_variables';
+// @import 'scss_partials/mixins';
+
+.profile-btn {
+  margin-right: 62px;
+  width: 54px;
+}
+
+.projects-btn {
+  margin-left: 62px;
+  width: 62px;
+}
+
+.section-btn {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.section-link-text {
+  color: #efc978;
+}
+
+.section-link-text:hover {
+  cursor: pointer;
+}
+
+.profile-btn-indicator {
+  position: relative;
+  top: -14px;
+  height: 2px;
+  width: 0%;
+  background-color: #efc978;
+  display: inline-block;
+}
+
+.projects-btn-indicator {
+  position: relative;
+  top: -14px;
+  height: 2px;
+  width: 0%;
+  background-color: #efc978;
+  display: inline-block;
+}

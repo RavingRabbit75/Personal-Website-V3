@@ -15,12 +15,19 @@
 
         <div id="header-icon-links" class="header-icon-links text-center">
             <app-icon-link *ngFor="let icon of globalIcons; index as i;"
-                [filename]="icon.filename"
-                [filenameOver]="icon.filenameOver"
+                [filename]="icon.filename_header"
+                [filenameOver]="icon.filename_header_over"
                 [link]="icon.link"
                 [section]="icon.section"
                 [rowPosition]="icon.rowPosition">
             </app-icon-link>
+        </div>
+
+        <div className="text-center">
+            <div id="sections-links" class="sections-links text-bold">
+                <app-section-button section="profile" sectionText="PROFILE"></app-section-button>
+                <app-section-button section="projects" sectionText="PROJECTS"></app-section-button>
+            </div>
         </div>
 
     </div>

@@ -1,0 +1,101 @@
+<div>
+
+    <div class="item-container">
+        <div class="item-title">
+            SKILLS & TECHNOLOGIES
+        </div>
+        <div class="item-subcontainer">
+            <div class="item-edge-highlight"></div>
+            <div class="item-edge-wall"></div>
+            <div class="container-fluid">
+                <div class="item-content">
+                    <div class="proficiency-title">
+                        Proficient:
+                    </div>
+                    <div class="text">
+                        {{ proficientSkills }}
+                    </div>
+                    <div class="proficiency-title">
+                        Exposure:
+                    </div>
+                    <div class="text">
+                        {{ exposureSkills }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-edge-highlight"></div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-title">
+            PROFESSIONAL EXPERIENCE
+        </div>
+        <div class="item-subcontainer">
+            <div class="item-edge-highlight"></div>
+            <div class="item-edge-wall"></div>
+            <div class="container-fluid">
+                <div class="item-content">
+                    <div *ngFor="let experience of experiences; index as idx">
+
+                        <div class="exp-title">
+                            <div class="col-xs-9">
+                                <span class="nowrap">{{ experience.name }} |</span>
+                                <span class>&ngsp;</span>
+                                <span class="nowrap">{{ experience.title }} |</span>
+                                <span class>&ngsp;</span>
+                                <span class="nowrap">{{ experience.location }}</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <span class="exp-year">{{ experience.years }}</span>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="idx < experiences.length-1 else endExperience">
+                            <div class="exp-accomplishments exp-container-margin"> 
+                                <ul class="accomplishments-list">
+                                    <li *ngFor="let accomplishment of experience.accomplishments">• {{accomplishment}}</li>
+                                </ul>
+                            </div>
+                        </ng-container>
+                        <ng-template #endExperience>
+                            <div class="exp-accomplishments"> 
+                                <ul class="accomplishments-list">
+                                    <li *ngFor="let accomplishment of experience.accomplishments">• {{accomplishment}}</li>
+                                </ul>
+                            </div>
+                        </ng-template>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-edge-highlight"></div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-title">
+            EDUCATION
+        </div>
+        <div class="item-subcontainer">
+            <div class="item-edge-highlight"></div>
+            <div class="item-edge-wall"></div>
+            <div class="container-fluid">
+                <div class="item-content">
+
+                    <div *ngFor="let item of education;">
+                        <div class="edu-degree">
+                            <span>{{ item.primaryDescription }}</span>
+                            <span>{{ item.year }}</span>
+                        </div>
+                        <div class="edu-institution">
+                            {{ item.secondaryDescription }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="item-edge-highlight"></div>
+    </div>
+
+</div>
