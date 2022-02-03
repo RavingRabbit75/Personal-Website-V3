@@ -53,7 +53,6 @@ export class ProfileComponent implements OnInit {
       this.experiences = data[0];
       this.skills = data[1];
       this.education = data[2];
-      console.log(this.education);
       this.proficientSkills = this.setupProficientSkills(this.skills);
       this.exposureSkills = this.setupExposureSkills(this.skills);
 

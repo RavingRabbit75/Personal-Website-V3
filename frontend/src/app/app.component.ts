@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudService } from './services/crud.service';
 
 interface GlobalData {
     global_description: {
@@ -32,19 +33,14 @@ export class AppComponent implements OnInit {
     }
     global_icons: Array<any> = [];
 
-    constructor() { 
+    constructor(private crud: CrudService) { 
 
     }
 
     ngOnInit(): void {
-        this.globalData.global_description.desc1 = "*****";
-        this.globalData.global_description.desc2 = "*****";
-        let fetch1 = fetch("http://localhost:3000/api/v1/globalinfo", {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-            }
-        }).then((results)=>{
+        this.globalData.global_description.desc1 = "";
+        this.globalData.global_description.desc2 = "";
+        this.crud.getGlobalInfo().then((results)=>{
             return results.json();
         }).then((results)=>{
             this.globalData.global_description = results.global_description;
@@ -62,8 +58,10 @@ export class AppComponent implements OnInit {
                 }
 
                 return {
-                    filename: assetsSubPath+icon.filename_header,
-                    filenameOver: assetsSubPath+icon.filename_header_over,
+                    filename_header: assetsSubPath+icon.filename_header,
+                    filename_header_over: assetsSubPath+icon.filename_header_over,
+                    filename_footer: assetsSubPath+icon.filename_footer,
+                    filename_footer_over: assetsSubPath+icon.filename_footer_over,
                     link: icon.link,
                     section: "header",
                     rowPosition: rowPosition

@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { concat, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
 
-  constructor(private http: HttpClient) { 
+  constructor() { 
     
   }
 
   getGlobalInfo() {
-    return this.http.get("/api/v1/globalinfo");
+    return fetch("/api/v1/globalinfo", {
+      method: "GET",
+      headers: {
+          Accept: "application/json",
+      }
+        
+    });
   }
 
   getProfileExperience() { 
