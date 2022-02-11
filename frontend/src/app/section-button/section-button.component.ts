@@ -11,6 +11,7 @@ export class SectionButtonComponent implements OnInit {
 
     @Input() section: string | undefined;
     @Input() sectionText: string | undefined;
+    @Input() sectionUrl: string | undefined;
 
     constructor(private gsap: GsapService) { 
 
