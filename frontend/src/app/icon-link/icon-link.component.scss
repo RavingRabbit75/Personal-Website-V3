@@ -5,13 +5,13 @@
 	position: relative;
 }
   
-.iconposition {
+.icon-position {
 	position: absolute;
 	top: 0;
 	left: 0;
 }
 
-.iconover {
+.icon-over {
 	opacity: 0;
 }
 
@@ -22,6 +22,7 @@
 
 .icon-left {
 	margin-right: 2.5px;
+	// margin-right: 50px;
 }
 
 .icon-right {
