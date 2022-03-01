@@ -191,8 +191,35 @@ router.get("/projects", (req: Request, res: Response) => {
         console.log(err);
     })
 
-
 });
+
+
+router.get("/projects/filters", (req: Request, res: Response) => {
+
+    let collection = req.app.locals.dbConnection.collection("filters");
+    let filtersFound: Array<any> = [];
+    let numberOfFilters = 0;
+    let responseObj = {
+        "filters" : filtersFound,
+        "message" : "success",
+        "total filters" : numberOfFilters
+    }
+
+    let cursorObj = collection.find();
+
+    Promise.all([cursorObj.toArray(), cursorObj.count()]).then((resultsArr)=>{
+        let mappedFilters = resultsArr[0].map((filterItem: any) => {
+            return [filterItem.id, filterItem.filter_tag]   
+        })
+
+        responseObj.filters = mappedFilters;
+        responseObj["total filters"] = resultsArr[1];
+        res.send(responseObj);
+    }).catch((err: any) => {
+        console.log(err);
+    });
+
+})
 
 
 export default router;
