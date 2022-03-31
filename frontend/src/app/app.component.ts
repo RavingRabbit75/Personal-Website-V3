@@ -33,6 +33,10 @@ export class AppComponent implements OnInit {
     }
     global_icons: Array<any> = [];
 
+    appState = {
+        currentSection: "None"
+    }
+
     constructor(private crud: CrudService) { 
 
     }

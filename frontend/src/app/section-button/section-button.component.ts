@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { GsapService } from '../services/gsap.service';
 
 @Component({
@@ -7,18 +7,31 @@ import { GsapService } from '../services/gsap.service';
     styleUrls: ['./section-button.component.scss']
 })
 
-export class SectionButtonComponent implements OnInit {
+export class SectionButtonComponent implements OnInit, OnChanges {
 
+    @Input() active: boolean = false;
     @Input() section: string | undefined;
     @Input() sectionText: string | undefined;
     @Input() sectionUrl: string | undefined;
+
+    sectionTextId = "";
+    sectionIndicatorId = "";
 
     constructor(private gsap: GsapService) { 
 
     }
 
     ngOnInit(): void {
-    
+        this.sectionTextId = this.section + "_btn_text";
+        this.sectionIndicatorId = this.section + "_btn_indicator";
+    }
+
+    ngOnChanges(): void {
+        if (this.active === true && this.sectionIndicatorId !== "") {
+            this.gsap.sectionIndicatorIn("#" + this.sectionIndicatorId);
+        } else if (this.active === false && this.sectionIndicatorId !== "") {
+            this.gsap.sectionIndicatorOut("#" + this.sectionIndicatorId);
+        }
     }
 
     getBtnClasses() {
@@ -48,6 +61,14 @@ export class SectionButtonComponent implements OnInit {
         }
 
         return classObj;
+    }
+
+    mouseOver() {
+        this.gsap.animToColor("#" + this.sectionTextId, 0.5, "#f5b730");
+    }
+
+    mouseOut() {
+        this.gsap.animToColor("#" + this.sectionTextId, 0.25, "#efc978");
     }
 
 }

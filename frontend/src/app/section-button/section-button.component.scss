@@ -1,5 +1,5 @@
-// @import 'scss_partials/global_variables';
-// @import 'scss_partials/mixins';
+@import "global_variables";
+@import "mixins";
 
 .profile-btn {
   margin-right: 62px;
@@ -35,7 +35,7 @@
   }
 
   a {
-    color: #efc978;
+    color: $light-tan;
   }
 }
 
@@ -48,7 +48,7 @@
   top: -14px;
   height: 2px;
   width: 0%;
-  background-color: #efc978;
+  background-color: $light-tan;
   display: inline-block;
 }
 
@@ -57,6 +57,6 @@
   top: -14px;
   height: 2px;
   width: 0%;
-  background-color: #efc978;
+  background-color: $light-tan;
   display: inline-block;
 }

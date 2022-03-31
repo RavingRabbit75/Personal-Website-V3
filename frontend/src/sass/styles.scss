@@ -1,0 +1,7 @@
+@import "global_variables";
+@import "mixins";
+
+body {
+    background-color: $main-grey-bg;
+    margin: 0px;
+}

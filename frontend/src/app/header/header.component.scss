@@ -1,29 +1,31 @@
+@import "global_variables";
+@import "mixins";
+
 .header-main-bg {
-    background-color: #39537c;
+    background-color: $header-blue;
     height: auto;
     padding-bottom: 20px;
     width: 100%;
 }
 
 .header-edge {
-    background-color: #5e88cb;
+    background-color: $header-blue-highlight;
     height: 2px;
 }
 
 .header-dropoff {
-    background-color: #284063;
+    background-color: $header-blue-shadow;
     height: 16px;
 }
 
 .hero-images-box {
     width: 100%;
-    overflow: hidden;
 }
   
 .hero-images {
     height: 250px;
     width: 370px;
-    margin-top: 30px;
+    margin-top: 31px;
     margin-bottom: 0;
     margin-left: auto;
     margin-right: auto;
@@ -56,10 +58,10 @@
 }
 
 .text {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @include font-smoothing-prefix();
     font-family: 'Open Sans Condensed', sans-serif;
-    color: #fff;
+    font-weight: 300;
+    color: $white;
     font-size: 11.5pt;
     letter-spacing: 1px;
 }
@@ -69,11 +71,10 @@
 }
 
 .text-bold {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @include font-smoothing-prefix();
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: bold;
-    color: #efc978;
+    color: $light-tan;
     font-size: 11.5pt;
     letter-spacing: 1px;
 }

@@ -12,9 +12,10 @@ import { IconLinkComponent } from './icon-link/icon-link.component';
 import { SectionButtonComponent } from './section-button/section-button.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectsFilterComponent } from './projects-filter/projects-filter.component';
 
 const siteRoutes: Routes = [
-  { path: "", redirectTo: "/profile", pathMatch: "full"},
+  { path: "", redirectTo: "/projects", pathMatch: "full"},
   { path: "projects", component: ProjectsComponent },
   { path: "profile", component: ProfileComponent}
 ]
@@ -28,7 +29,8 @@ const siteRoutes: Routes = [
     IconLinkComponent,
     SectionButtonComponent,
     ProfileComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ProjectsFilterComponent
   ],
   imports: [
     RouterModule.forRoot(siteRoutes),

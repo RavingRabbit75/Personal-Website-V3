@@ -1,6 +1,6 @@
-<div [ngClass]="getBtnClasses()">
-    <div class="section-link-text" routerLink="{{ sectionUrl }}">
+<div [ngClass]="getBtnClasses()" (mouseover)="mouseOver()" (mouseout)="mouseOut()">
+    <div id="{{ sectionTextId }}" class="section-link-text" routerLink="{{ sectionUrl }}">
         {{ sectionText }}
     </div>
-    <div id="" [ngClass]="getIndicatorClasses()"></div>
+    <div id="{{ sectionIndicatorId }}" [ngClass]="getIndicatorClasses()"></div>
 </div>

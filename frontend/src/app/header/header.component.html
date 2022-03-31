@@ -26,11 +26,13 @@
         <div className="text-center">
             <div id="sections-links" class="sections-links text-bold">
                 <app-section-button 
+                    [active]="profileActive"
                     section="profile" 
                     sectionText="PROFILE"
                     sectionUrl="/profile">
                 </app-section-button>
                 <app-section-button 
+                    [active]="projectsActive"
                     section="projects" 
                     sectionText="PROJECTS"
                     sectionUrl="/projects">
